@@ -22,9 +22,9 @@ public class ProjetoSpringApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		ConsumoApi consumoApi = new ConsumoApi();
+		//ConsumoApi consumoApi = new ConsumoApi();
 
-		String json = consumoApi.obterDados("http://www.omdbapi.com/?t=lost&apikey=c5f423d6");
+		//String json = consumoApi.obterDados("http://www.omdbapi.com/?t=lost&apikey=c5f423d6");
 
 		//System.out.println(json);
 
