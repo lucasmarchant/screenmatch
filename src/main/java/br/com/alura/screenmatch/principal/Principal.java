@@ -7,6 +7,7 @@ import br.com.alura.screenmatch.service.model.DadosSerie;
 import br.com.alura.screenmatch.service.model.DadosTemporada;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,31 +20,41 @@ public class Principal {
     private final String API_KEY = "&apikey=c5f423d6";
 
     public void exibeMenu(){
-        System.out.println("Digite o nome da série para buscar");
-        String nomeSerie = leitura.nextLine();
-
-        String json = consumoApi.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + API_KEY);
-        DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
-        System.out.println(dados);
-
-        List<DadosTemporada> temporadas = new ArrayList<>();
-
-        for (int i = 1; i <= dados.totalTemporadas(); i++){
-            json = consumoApi.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + "&season=" + i + API_KEY);
-            DadosTemporada dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
-            temporadas.add(dadosTemporada);
-        }
-        temporadas.forEach(System.out::println);
+//        System.out.println("Digite o nome da série para buscar");
+//        String nomeSerie = leitura.nextLine();
 //
-//        for (int i = 0; i < dados.totalTemporadas(); i++){
-//            List <DadosEpisodio> episodiosTemporada = temporadas.get(i).episodios();
-//            for (int j = 0; j < episodiosTemporada.size(); j++){
-//                System.out.println(episodiosTemporada.get(j).titulo());
-//            }
+//        String json = consumoApi.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + API_KEY);
+//        DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
+//        System.out.println(dados);
+//
+//        List<DadosTemporada> temporadas = new ArrayList<>();
+//
+//        for (int i = 1; i <= dados.totalTemporadas(); i++){
+//            json = consumoApi.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + "&season=" + i + API_KEY);
+//            DadosTemporada dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
+//            temporadas.add(dadosTemporada);
 //        }
+//        temporadas.forEach(System.out::println);
+////
+////        for (int i = 0; i < dados.totalTemporadas(); i++){
+////            List <DadosEpisodio> episodiosTemporada = temporadas.get(i).episodios();
+////            for (int j = 0; j < episodiosTemporada.size(); j++){
+////                System.out.println(episodiosTemporada.get(j).titulo());
+////            }
+////        }
+//
+//        //lambdas
+//        temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
 
-        //lambdas
-        temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
+
+        List<String> nomes = Arrays.asList("Lucas", "Cássio","Marbi", "Beto", "Beti");
+
+        nomes.stream()
+                .sorted()
+                .limit(3)
+                .filter(n -> n.startsWith("C"))
+                .map(n -> n.toUpperCase())
+                .forEach(System.out::println);
 
     }
 }
