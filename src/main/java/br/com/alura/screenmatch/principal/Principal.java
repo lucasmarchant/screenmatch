@@ -64,6 +64,7 @@ public class Principal {
                 .flatMap(t -> t.episodios().stream())
                 .collect(Collectors.toList());
 
+/*
         System.out.println("\nTop 10 episódios:");
         dadosEpisodios.stream()
                 .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
@@ -75,15 +76,31 @@ public class Principal {
                 .map(e-> e.titulo().toUpperCase())
                 .peek(e -> System.out.println("Mapeamento " + e))
                 .forEach(System.out::println);
+*/
 
-/*        List<Episodio> episodios = temporadas.stream()
+        List<Episodio> episodios = temporadas.stream()
                 .flatMap(t -> t.episodios().stream()
                         .map(d -> new Episodio(t.numero(), d))
                 ).collect(Collectors.toList());
 
         episodios.forEach(System.out::println);
 
-        System.out.println("A partir de que ano você deseja ver os episódios?");
+        System.out.println("Digite um trecho do título de um episódio: ");
+        String trechoTitulo = leitura.nextLine();
+
+        Optional<Episodio> episodioBuscado = episodios.stream()
+                .filter(e -> e.getTitulo().toUpperCase().contains(trechoTitulo.toUpperCase()))
+                .findFirst();
+
+        if (episodioBuscado.isPresent()){
+            System.out.println("Episódio encontrado!");
+            System.out.println("Temporada " + episodioBuscado.get().getTemporada());
+        }else {
+            System.out.println("Episódio não encontrado!");
+        }
+
+
+       /* System.out.println("A partir de que ano você deseja ver os episódios?");
 
         Integer ano = leitura.nextInt();
         leitura.nextLine();
