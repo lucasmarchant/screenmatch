@@ -26,7 +26,7 @@ public class Serie {
     private String poster;
 
     //Anotacao para nao persistir no banco de dados
-    @Transient
+    @OneToMany(mappedBy = "serie")
     List<Episodio> episodios = new ArrayList<>();
 
     public Serie(){}
