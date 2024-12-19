@@ -26,11 +26,11 @@ public class Serie {
     private String poster;
 
     //Anotacao para nao persistir no banco de dados
-    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Episodio> episodios = new ArrayList<>();
 
     public Serie(){}
-
+3
     public Serie (DadosSerie dadosSerie){
         this.titulo = dadosSerie.titulo();
         this.totalTemporadas = dadosSerie.totalTemporadas();
@@ -111,6 +111,7 @@ public class Serie {
     }
 
     public void setEpisodios(List<Episodio> episodios) {
+        episodios.forEach(e-> e.setSerie(this));
         this.episodios = episodios;
     }
 
@@ -124,6 +125,6 @@ public class Serie {
                 ", Atores='" + atores + '\'' +
                 ", Sinopse='" + sinopse + '\'' +
                 ", Poster='" + poster + '\'' +
-                '}';
+                        ", Episodio='" + episodios + '\'';
     }
 }
