@@ -26,7 +26,7 @@ public class Serie {
     private String poster;
 
     //Anotacao para nao persistir no banco de dados
-    @OneToMany(mappedBy = "serie")
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
     List<Episodio> episodios = new ArrayList<>();
 
     public Serie(){}
